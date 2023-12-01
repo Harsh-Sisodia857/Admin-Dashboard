@@ -30,32 +30,29 @@ function Home() {
      filterEmp = filterEmp.filter((emp) => emp.role === selectedRole);
    }
 
-
-   let newData = paginate(filterEmp, currentPage, pageSize);
-
-   return newData;
+   console.log(filterEmp)
+   return filterEmp;
  };
 
 
   const handleRoleSelect = (r) => {
     setSelectedRole(r);
-    console.log(r);
     setCurrentPage(1);
   }
 
-  const currPageEmp = getData();
-  console.log(currPageEmp);
+  const getPaginationData = (allEmp) => {
+    let newData = paginate(allEmp, currentPage, pageSize);
+    console.log(newData);
+    return newData;
+  };
 
-  let paginationData;
-  if (searchQuery)
-    paginationData = currPageEmp;
-  else
-    paginationData = user;
+  const allEmp = getData();
+
+  let paginationData = getPaginationData(allEmp);
+ 
   return (
     <div className="my-10 box">
-      <p className="m-2">
-        Showing {paginationData.length} employees in the database
-      </p>
+      <p className="m-2">Showing {allEmp.length} employees in the database</p>
       <div className="grid grid-cols-[30%,70%] gap-4">
         <div className="mt-5">
           <ListGroup
@@ -67,14 +64,14 @@ function Home() {
         <div>
           <div className="container">
             {user ? (
-              <UserTable users={currPageEmp} />
+              <UserTable users={paginationData} />
             ) : (
               "No User Found in The Database"
             )}
           </div>
           <div>
             <Pagination
-              itemsCount={paginationData.length}
+              itemsCount={allEmp.length}
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={handlePageChange}
