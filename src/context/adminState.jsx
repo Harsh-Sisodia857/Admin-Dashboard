@@ -26,7 +26,11 @@ const AdminState = (props) => {
         } catch (error) {
             console.error(error);
         }
-    }
+  }
+  
+  const deleteAUser = async () => {
+    
+  }
 
     useEffect(() => {
         fetchUserData()

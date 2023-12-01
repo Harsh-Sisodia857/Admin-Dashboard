@@ -1,24 +1,23 @@
-import React from 'react'
-
+import React from "react";
 
 const ListGroup = (props) => {
-    const {
-      items,
-      textProperty,
-      valueProperty,
-      // selectedItem,
-      // onItemSelect,
-  } = props;
-  
-    return (
-      <ul className="list-group" style={{ cursor: "pointer" }}>
-        {items.map((item) => (
-          <li key = {item}>
-            {item}
-          </li>
-        ))}
-      </ul>
-    );
-}
- 
+  const { items, onItemSelect, selectedItem } = props;
+
+  return (
+    <ul className="bg-gray-100 p-4 rounded-md shadow-md">
+      {items.map((item) => (
+        <li
+          onClick={() => onItemSelect(item)}
+          key={item}
+          className={`cursor-pointer py-2 px-4 mb-2 rounded-md ${
+            item === selectedItem ? "bg-blue-500 text-white" : "bg-white"
+          }`}
+        >
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
 export default ListGroup;

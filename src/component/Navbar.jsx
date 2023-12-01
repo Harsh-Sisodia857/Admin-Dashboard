@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import SearchBox from "./SearchBox";
 import AdminContext from "../context/adminContext";
+import { FaSearch } from "react-icons/fa";
 
 const NavBar = () => {
   const { searchQuery, setSearchQuery, setCurrentPage } = useContext(AdminContext);
@@ -15,7 +16,10 @@ const NavBar = () => {
     >
       <div className="navbar-brand">Admin Panel</div>
 
-      <SearchBox value={searchQuery} onChange={handleSearch} />
+      <form class="flex items-baseline justify-content-between">
+        <SearchBox value={searchQuery} onChange={handleSearch} />
+        <FaSearch style={{position: "relative",left: "-25px", cursor : "pointer"} } />
+      </form>
     </nav>
   );
 };
