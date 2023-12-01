@@ -1,8 +1,10 @@
-import React from "react";
+import React,{useContext} from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
+import AdminContext from "../context/adminContext";
 
 function UserTable({ users }) {
+  const {deleteAUser} = useContext(AdminContext)
   return (
     <div>
       <table className="table-fixed w-full bg-white border border-gray-300 shadow-md rounded-md m-3">
@@ -23,7 +25,7 @@ function UserTable({ users }) {
               <td className="border px-4 py-2">
                 <div className="flex items-center space-x-4">
                   <span className="cursor-pointer text-black-500 text-lg hover:text-red-700">
-                    <AiOutlineDelete />
+                    <AiOutlineDelete onClick={() => deleteAUser(emp.id)} />
                   </span>
                   <span className="cursor-pointer text-green-500 text-lg hover:text-green-700">
                     <FaEdit />

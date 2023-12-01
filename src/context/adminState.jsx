@@ -28,8 +28,9 @@ const AdminState = (props) => {
         }
   }
   
-  const deleteAUser = async () => {
-    
+  const deleteAUser = async (id) => {
+    let newUser = user.filter((emp) => emp.id !== id);
+    setUser(newUser);
   }
 
     useEffect(() => {
@@ -46,7 +47,8 @@ const AdminState = (props) => {
           setCurrentPage,
           updatePage,
           searchQuery,
-          setSearchQuery
+          setSearchQuery,
+          deleteAUser
         }}
       >
         {props.children}
