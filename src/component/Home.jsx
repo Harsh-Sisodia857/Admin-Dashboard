@@ -7,14 +7,21 @@ import UserTable from './userTable';
 
 
 function Home() {
-  const [selectedRole, setSelectedRole] = useState(null);
+  const [selectedRole, setSelectedRole] = useState("All");
   const context = useContext(AdminContext);
   const { user, pageSize, currentPage,setCurrentPage, searchQuery } = context;
-  const roles = [...new Set(user.map((emp) => emp.role))];
+  const roles = ["All",...new Set(user.map((emp) => emp.role))];
+  
   const handlePageChange = (page) => {
     console.log(page);
     context.updatePage(page);
     setCurrentPage(page);
+  };
+
+  
+  const handleRoleSelect = (r) => {
+    setSelectedRole(r);
+    setCurrentPage(1);
   };
 
  const getData = () => {
@@ -26,7 +33,7 @@ function Home() {
      );
    }
 
-   if (selectedRole) {
+   if (selectedRole && selectedRole != "All") {
      filterEmp = filterEmp.filter((emp) => emp.role === selectedRole);
    }
 
@@ -35,10 +42,6 @@ function Home() {
  };
 
 
-  const handleRoleSelect = (r) => {
-    setSelectedRole(r);
-    setCurrentPage(1);
-  }
 
   const getPaginationData = (allEmp) => {
     let newData = paginate(allEmp, currentPage, pageSize);
