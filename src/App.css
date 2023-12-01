@@ -1,0 +1,53 @@
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+} */
+
+*{
+  font-weight: 500;
+}
+
+.app::before{
+    content: '';
+    position: fixed;
+    top:0px;
+    left:0px;
+    background: url('./assets/bg.jpg') no-repeat center center fixed;
+    width: 100%;
+    z-index: -1;
+    min-height: 100%;
+    height: auto;
+    opacity: 0.5;
+}
+
+.box{
+  max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
