@@ -4,6 +4,7 @@ import AdminContext from "../context/adminContext";
 import Pagination from './pagination';
 import { paginate } from './../../utils/paginate';
 import UserTable from './userTable';
+import toast from "react-hot-toast";
 
 
 function Home() {
@@ -22,6 +23,7 @@ function Home() {
   const handleRoleSelect = (r) => {
     setSelectedRole(r);
     setCurrentPage(1);
+    toast.success(`Showing Employee with ${r} role`);
   };
 
  const getData = () => {

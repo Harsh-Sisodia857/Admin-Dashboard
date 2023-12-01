@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AdminContext from "./adminContext";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 
 const AdminState = (props) => {
@@ -28,7 +29,10 @@ const AdminState = (props) => {
         }
   }
   
-    const deleteAUser = (id) => {
+  const deleteAUser = (id) => {
+      toast("Good Job!", {
+        icon: "🚮",
+      });
       setUser((prevUsers) => prevUsers.filter((user) => user.id !== id));
     };
 
