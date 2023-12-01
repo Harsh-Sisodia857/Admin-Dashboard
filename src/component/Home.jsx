@@ -37,7 +37,7 @@ function Home() {
      filterEmp = filterEmp.filter((emp) => emp.role === selectedRole);
    }
 
-   console.log(filterEmp)
+  //  console.log(filterEmp)
    return filterEmp;
  };
 
@@ -45,7 +45,7 @@ function Home() {
 
   const getPaginationData = (allEmp) => {
     let newData = paginate(allEmp, currentPage, pageSize);
-    console.log(newData);
+    // console.log(newData);
     return newData;
   };
 
@@ -55,7 +55,10 @@ function Home() {
  
   return (
     <div className="my-10 box">
-      <p className="m-2">Showing {allEmp.length} employees in the database</p>
+      <p className="m-2">
+        {`Showing ${paginationData.length} out of ${allEmp.length} employees in the
+        database`}
+      </p>
       <div className="grid grid-cols-[30%,70%] gap-4">
         <div className="mt-5">
           <ListGroup

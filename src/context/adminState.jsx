@@ -28,10 +28,10 @@ const AdminState = (props) => {
         }
   }
   
-  const deleteAUser = async (id) => {
-    let newUser = user.filter((emp) => emp.id !== id);
-    setUser(newUser);
-  }
+    const deleteAUser = (id) => {
+      setUser((prevUsers) => prevUsers.filter((user) => user.id !== id));
+    };
+
 
     useEffect(() => {
         fetchUserData()
