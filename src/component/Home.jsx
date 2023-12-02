@@ -89,7 +89,7 @@ function Home() {
         {`Showing ${paginationData.length} out of ${allEmp.length} employees in the
         database`}
       </p>
-      <div className="grid grid-cols-[30%,70%] gap-4">
+      <div className="grid grid-cols-[20%,80%] gap-4">
         <div className="mt-5">
           <ListGroup
             items={roles}
