@@ -11,7 +11,7 @@ const Pagination = (props) => {
   return (
     <nav className="flex items-center justify-center mt-[20px]">
       <ul className="flex">
-        <li className="m-[10px 3px]">
+        <li style={{ margin: "10px 0px" }}>
           <span
             className={`flex items-center justify-center margin: "10px 3px" ${
               currentPage === 1 ? "hidden" : ""

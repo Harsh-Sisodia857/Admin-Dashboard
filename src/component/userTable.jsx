@@ -3,6 +3,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
 import AdminContext from "../context/adminContext";
+import toast from "react-hot-toast";
 
 function UserTable({ users }) {
   const { deleteAUser, editAUser } = useContext(AdminContext);
@@ -36,13 +37,12 @@ function UserTable({ users }) {
   };
 
   const cancelEditing = () => {
+    toast.error("Unsuccessfull To Edit");
     setEditedRow(null);
   };
 
   const saveEditing = () => {
-    // console.log(editedValues.name);
-    // console.log(editedValues.email);
-    // console.log(editedValues.role);
+    toast.success("Successfully Edited");
     editAUser(editedValues);
     setEditedRow(null);
   };
