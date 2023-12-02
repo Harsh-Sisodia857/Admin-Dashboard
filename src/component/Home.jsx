@@ -26,6 +26,9 @@ function Home() {
     toast.success(`Showing Employee with ${r} role`);
   };
 
+     
+
+
  const getData = () => {
    let filterEmp = user;
 
@@ -55,6 +58,19 @@ function Home() {
 
   let paginationData = getPaginationData(allEmp);
  
+   const handlePrevious = () => {
+     if (currentPage == 1) return;
+     let newPage = currentPage - 1;
+     setCurrentPage(newPage);
+   };
+
+   const handleNext = () => {
+     let totalEmp = allEmp.length;
+     if (currentPage == Math.ceil(totalEmp / pageSize)) return;
+     let newPage = currentPage + 1;
+     setCurrentPage(newPage);
+   };
+
   return (
     <div className="my-10 box">
       <p className="m-2">
@@ -83,6 +99,8 @@ function Home() {
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={handlePageChange}
+              handlePrevious={handlePrevious}
+              handleNext={handleNext}
             />
           </div>
         </div>
