@@ -4,13 +4,15 @@ import { AiFillDelete } from "react-icons/ai";
 import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
 import AdminContext from "../context/adminContext";
 import toast from "react-hot-toast";
+import _ from "lodash";
 
 function UserTable({ users }) {
-  const { deleteAUser, editAUser } = useContext(AdminContext);
+  const { deleteAUser, editAUser, handleSort, renderSortIcon } =
+    useContext(AdminContext);
   const [selectedRows, setSelectedRows] = useState([]);
   const [editedRow, setEditedRow] = useState(null);
   const [editedValues, setEditedValues] = useState({
-    id : "",
+    id: "",
     name: "",
     email: "",
     role: "",
@@ -26,10 +28,22 @@ function UserTable({ users }) {
     });
   };
 
+  const toggleSelectAll = () => {
+    setSelectedRows((prevSelectedRows) => {
+      if (prevSelectedRows.length === users.length) {
+        // All rows are selected, so deselect all
+        return [];
+      } else {
+        // Some rows are not selected, so select all
+        return users.map((user) => user.id);
+      }
+    });
+  };
+
   const startEditing = (user) => {
     setEditedRow(user.id);
     setEditedValues({
-      id : user.id,
+      id: user.id,
       name: user.name,
       email: user.email,
       role: user.role,
@@ -37,7 +51,7 @@ function UserTable({ users }) {
   };
 
   const cancelEditing = () => {
-    toast.error("Unsuccessfull To Edit");
+    toast.error("Unsuccessful To Edit");
     setEditedRow(null);
   };
 
@@ -66,10 +80,10 @@ function UserTable({ users }) {
   };
 
   const handleInputChange = (userId, field, value) => {
-     setEditedValues((prevValues) => ({
-       ...prevValues,
-       [field]: value,
-     }));
+    setEditedValues((prevValues) => ({
+      ...prevValues,
+      [field]: value,
+    }));
   };
 
   return (
@@ -78,11 +92,24 @@ function UserTable({ users }) {
         <thead className="bg-gray-200">
           <tr>
             <th className="px-2 py-2 w-10">
-              {/* Empty header for checkbox column */}
+              <label className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  className="form-checkbox text-blue-500"
+                  checked={selectedRows.length === users.length}
+                  onChange={toggleSelectAll}
+                />
+              </label>
             </th>
-            <th className="px-2 py-2">Name</th>
-            <th className="px-4 py-2">Email</th>
-            <th className="px-4 py-2">Role</th>
+            <th className="px-2 py-2" onClick={() => handleSort("name")}>
+              Name {renderSortIcon("name")}
+            </th>
+            <th className="px-4 py-2" onClick={() => handleSort("email")}>
+              Email {renderSortIcon("email")}
+            </th>
+            <th className="px-4 py-2" onClick={() => handleSort("role")}>
+              Role {renderSortIcon("role")}
+            </th>
             <th className="px-4 py-2">Action</th>
           </tr>
         </thead>

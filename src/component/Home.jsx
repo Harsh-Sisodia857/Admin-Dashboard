@@ -5,13 +5,20 @@ import Pagination from './pagination';
 import { paginate } from './../../utils/paginate';
 import UserTable from './userTable';
 import toast from "react-hot-toast";
+import _ from "lodash";
 
 
 function Home() {
   const [selectedRole, setSelectedRole] = useState("All");
   const context = useContext(AdminContext);
-  const { user, pageSize, currentPage, setCurrentPage, searchQuery } = context;
-  console.log(user)
+  const {
+    user,
+    pageSize,
+    currentPage,
+    setCurrentPage,
+    searchQuery,
+    sortColumn
+  } = context;
   const roles = ["All",...new Set(user.map((emp) => emp.role))];
   
   const handlePageChange = (page) => {
@@ -45,19 +52,23 @@ function Home() {
 
   //  console.log(filterEmp)
    return filterEmp;
- };
-
-
-
-  const getPaginationData = (allEmp) => {
+  };
+  
+ const getPaginationData = (allEmp) => {
     let newData = paginate(allEmp, currentPage, pageSize);
     // console.log(newData);
     return newData;
   };
-
+  
   const allEmp = getData();
+  const sortedEmployee = _.orderBy(
+    allEmp,
+    [sortColumn.path],
+    [sortColumn.order]
+  );
+  // console.log(sortedEmployee)
 
-  let paginationData = getPaginationData(allEmp);
+  let paginationData = getPaginationData(sortedEmployee);
  
    const handlePrevious = () => {
      if (currentPage == 1) return;

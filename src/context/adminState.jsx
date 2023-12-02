@@ -9,7 +9,10 @@ const AdminState = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [sortColumn, setSortColumn] = useState({
+    path: "name",
+    order: "asc",
+  });
   const updatePage = (newPage) => {
     setCurrentPage(newPage);
   };
@@ -55,9 +58,37 @@ const AdminState = (props) => {
     fetchUserData();
   }, []);
 
+  
+ 
+  const handleSort = (path) => {
+    toast.success(`Sorted by ${path}`)
+    setSortColumn((prevSortColumn) => ({
+      path,
+      order:
+        prevSortColumn.path === path
+          ? prevSortColumn.order === "asc"
+            ? "desc"
+            : "asc"
+          : "asc",
+    }));
+  };
+
+  const renderSortIcon = (column) => {
+    if (column !== sortColumn.path) return null;
+    return sortColumn.order === "asc" ? (
+      <i className="fa fa-sort-asc"></i>
+    ) : (
+      <i className="fa fa-sort-desc"></i>
+    );
+  };
+
+ 
   return (
     <AdminContext.Provider
       value={{
+        handleSort,
+        renderSortIcon,
+        sortColumn,
         user,
         pageSize,
         setPageSize,
