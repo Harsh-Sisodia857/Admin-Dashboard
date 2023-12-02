@@ -46,7 +46,7 @@ const Pagination = (props) => {
             </a>
           </li>
         ))}
-        <li class="page-item">
+        <li className="page-item">
           <a
             className={`flex items-center justify-center ${
               currentPage === Math.ceil(itemsCount / pageSize) ? "hidden" : ""

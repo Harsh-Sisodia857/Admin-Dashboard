@@ -5,10 +5,11 @@ import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
 import AdminContext from "../context/adminContext";
 
 function UserTable({ users }) {
-  const { deleteAUser } = useContext(AdminContext);
+  const { deleteAUser, editAUser } = useContext(AdminContext);
   const [selectedRows, setSelectedRows] = useState([]);
   const [editedRow, setEditedRow] = useState(null);
   const [editedValues, setEditedValues] = useState({
+    id : "",
     name: "",
     email: "",
     role: "",
@@ -24,12 +25,13 @@ function UserTable({ users }) {
     });
   };
 
-  const startEditing = (userId) => {
-    setEditedRow(userId);
+  const startEditing = (user) => {
+    setEditedRow(user.id);
     setEditedValues({
-      name: initialValues.name,
-      email: initialValues.email,
-      role: initialValues.role,
+      id : user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
     });
   };
 
@@ -38,9 +40,10 @@ function UserTable({ users }) {
   };
 
   const saveEditing = () => {
-    console.log(setEditedValues.name);
-    console.log(setEditedValues.email);
-    console.log(setEditedValues.role);
+    // console.log(editedValues.name);
+    // console.log(editedValues.email);
+    // console.log(editedValues.role);
+    editAUser(editedValues);
     setEditedRow(null);
   };
 
@@ -158,7 +161,7 @@ function UserTable({ users }) {
                   ) : (
                     <span
                       className="cursor-pointer text-green-500 text-lg hover:text-green-700"
-                      onClick={() => startEditing(emp.id)}
+                      onClick={() => startEditing(emp)}
                     >
                       <FaEdit />
                     </span>

@@ -10,7 +10,8 @@ import toast from "react-hot-toast";
 function Home() {
   const [selectedRole, setSelectedRole] = useState("All");
   const context = useContext(AdminContext);
-  const { user, pageSize, currentPage,setCurrentPage, searchQuery } = context;
+  const { user, pageSize, currentPage, setCurrentPage, searchQuery } = context;
+  console.log(user)
   const roles = ["All",...new Set(user.map((emp) => emp.role))];
   
   const handlePageChange = (page) => {

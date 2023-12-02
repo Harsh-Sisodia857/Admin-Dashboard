@@ -31,6 +31,19 @@ const AdminState = (props) => {
     }
   };
 
+  const editAUser = (emp) => {
+    setUser((prevUsers) => {
+      return prevUsers.map((user) => {
+        if (user.id === emp.id) {
+          // Replace the existing user with the updated one
+          return emp;
+        }
+        return user;
+      });
+    });
+  };
+
+
   const deleteAUser = (id) => {
     toast("Deleted Successfully", {
       icon: "🚮",
@@ -54,7 +67,8 @@ const AdminState = (props) => {
         searchQuery,
         setSearchQuery,
         deleteAUser,
-        loading
+        loading,
+        editAUser
       }}
     >
       {props.children}

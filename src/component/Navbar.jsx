@@ -16,7 +16,7 @@ const NavBar = () => {
     >
       <div className="navbar-brand">Admin Panel</div>
 
-      <form class="flex items-baseline justify-content-between">
+      <form className="flex items-baseline justify-content-between">
         <SearchBox value={searchQuery} onChange={handleSearch} />
         <FaSearch style={{position: "relative",left: "-25px", cursor : "pointer"} } />
       </form>
